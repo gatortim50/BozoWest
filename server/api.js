@@ -229,6 +229,6 @@ db.once('open', function callback() {
 
 // -----------------------------------
 
-var server = app.listen(3000, function () {
+var server = app.listen(8000, function () {
 	console.log('api listening on ', server.address().port);
 });
