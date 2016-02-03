@@ -11,11 +11,11 @@ mongodb must be running prior to `npm start`
 2. npm install && npm start
 ```
 
-open another window/terminal
+open another terminal/window
 ----------------------------
 ```
 cd client
 npm install && bower install
-gulp
-gulp serve
+
+grunt serve
 ```
