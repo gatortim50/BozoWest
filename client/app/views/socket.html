@@ -1,0 +1,12 @@
+<div class="lead">
+    <input ng-model="vm.dataToSend" placeholder="data" required>
+    
+    <button ng-click="vm.emitBasic()" class="btn btn-sm btn-default btn-success" type="button">Send</button>
+
+
+    <button ng-click="vm.emitACK()" class="btn btn-sm btn-default btn-default" type="button">Send (ACK)</button>
+
+    <div>Server Response: {{ vm.serverResponse }}</div>
+    <div>Server Response (ACK): {{ vm.serverResponseACK }}</div>
+</div>
+
