@@ -1,8 +1,8 @@
 # ViaWest
-ViaWest Assignment
+ViaWest Assignment - instructions at bottom
 
 # yeomen generator
-yo gulp-angular [optional app name]
+yo angular [optional app name]
 
 # Check out repo and build
 mongodb must be running prior to `npm start`
@@ -21,14 +21,13 @@ open another terminal/window
 3. grunt serve
 ```
 
-ViaWest Assignment:
--------------------
+ViaWest instructions:
+---------------------
 
 ```
 1. Build some REST Services in Node.js
 2. Build in Node.js a Websocket that sends a message to a client and have the client do something with the message
 3. Integrate a basic auth or OAuth2 authentication showing how different permissions affect the functionality/access
 4. Demonstrate Yeoman Angular generator
-5. Build the client in AngularJS 2.0 and Bootstrap version 3.x
-(later clarified to Angular 1.x, AngularJS 2.0 is beta as of 02/03/2016)
+5. Build the client in AngularJS and Bootstrap
 ```
