@@ -6,12 +6,10 @@
 
       function authSuccessful(res) {
         authToken.setToken(res.token);
-        console.log('why u no state.go main ?');
         $state.go('main');
       }
 
       this.login = function (email, password) {
-        console.log('login then ?');
         return $http
           .post(API_URL + 'login', {
             email: email,
@@ -21,7 +19,6 @@
       };
 
       this.register = function (email, password) {
-        console.log('register then ?');
         return $http
           .post(API_URL + 'register', {
             email: email,

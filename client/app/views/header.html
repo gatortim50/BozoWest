@@ -29,8 +29,9 @@
 						<a ui-sref="login">Login</a>
 					</li>
 					<li ng-show="isAuthenticated()" ui-sref-active="active">
-						<a ui-sref="logout">Logout</a>
+						<a ui-sref="logout"><span class="glyphicon glyphicon-log-out"></span>Logout: {{user}}</a>
 					</li>
+
 				</ul>
 			</div>
 		</div>
