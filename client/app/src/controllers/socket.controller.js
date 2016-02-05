@@ -2,27 +2,36 @@
   'use strict';
 
   angular.module('client')
-    .controller('SocketController', function ($socket) {
-      var vm = this;
+    .controller('SocketController', function ($scope, $log, $socket, messageFormatter) {
 
-      $socket.on('echo', function (data) {
-        vm.serverResponse = data;
-      });
+      $scope.nickName = 'ViaWestCSR';
+      $scope.messageLog = 'Ready to chat!';
 
-      vm.emitBasic = function emitBasic() {
-        console.log("emitBasic", vm.dataToSend);
-        $socket.emit('echo', vm.dataToSend);
-        vm.dataToSend = '';
+      $scope.sendMessage = function(msg) {
+        console.log(msg);
+
+        $scope.message = msg;
+        $scope.messageLog = messageFormatter(new Date(), $scope.nickName, $scope.messageLog);
+
+        $log.debug('sending message', $scope.message);
+        $socket.emit('message', $scope.nickName, $scope.message);
+        $log.debug('message sent', $scope.message);
+        $scope.message = '';
       };
 
-      vm.emitACK = function emitACK() {
-        console.log("emitACK", vm.dataToSend);
-        $socket.emit('echo-ack', vm.dataToSend, function (data) {
-          vm.serverResponseACK = data;
+      $scope.$on('socket:broadcast', function(event, data) {
+        $log.debug('got a message', event.name);
+        if (!data.payload) {
+          $log.error('invalid message', 'event', event,
+            'data', JSON.stringify(data));
+          return;
+        }
+        $scope.$apply(function() {
+          $scope.messageLog = messageFormatter(
+              new Date(), data.source,
+              data.payload) + $scope.messageLog;
         });
-        vm.dataToSend = '';
-      };
-
+      });
 
     });
 

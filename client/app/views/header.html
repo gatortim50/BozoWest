@@ -22,8 +22,8 @@
 					<li ui-sref-active="active">
 						<a ui-sref="services">Services</a>
 					</li>
-					<li ui-sref-active="active">
-						<a ui-sref="socket">Socket</a>
+					<li ng-show="isAuthenticated()" ui-sref-active="active">
+						<a ui-sref="socket">Socket Messages</a>
 					</li>
 					<li ng-hide="isAuthenticated()" ui-sref-active="active">
 						<a ui-sref="login">Login</a>
