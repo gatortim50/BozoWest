@@ -7,9 +7,12 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local');
 var request = require('request');
 var moment = require('moment');
-//var facebookAuth = require('./services/facebookAuth.js');
+
+
 
 var app = express();
+
+
 
 app.use(bodyParser.json());
 app.use(passport.initialize());
@@ -201,19 +204,6 @@ app.post('/auth/google', function (req, res) {
 	});
 });
 
-// -- socket.io -------------------------------
-var io = require('socket.io')(8080);
-
-io.sockets.on('connection', function (socket) {
-	socket.on('echo', function (data) {
-		socket.emit('echo', data);
-	});
-
-	socket.on('echo-ack', function (data, callback) {
-		callback(data);
-	});
-});
-
 
 // -- MONGOOSE ---------------------------------
 
@@ -232,3 +222,11 @@ db.once('open', function callback() {
 var server = app.listen(8000, function () {
 	console.log('api listening on ', server.address().port);
 });
+
+io = require('socket.io').listen(server);
+
+// set up our socket server
+require('./sockets/base')(io);
+
+
+
