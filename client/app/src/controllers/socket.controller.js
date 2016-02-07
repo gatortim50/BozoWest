@@ -4,6 +4,7 @@
   angular.module('client')
     .controller('SocketController', function ($scope, $log, $socket, messageFormatter) {
 
+
       $scope.nickName = 'ViaWestCSR';
       $scope.messageLog = 'Ready to chat!';
 
@@ -18,6 +19,10 @@
         $log.debug('message sent', $scope.message);
         $scope.message = '';
       };
+
+      $scope.$on('add-album', function(event, data){
+        log.debug(data);
+      });
 
       $scope.$on('socket:broadcast', function(event, data) {
         $log.debug('got a message', event.name);
