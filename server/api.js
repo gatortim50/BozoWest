@@ -7,10 +7,16 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local');
 var request = require('request');
 var moment = require('moment');
+var morgan = require('morgan');
 
 var app = express();
 
+// use body parser so we can get info from POST and/or URL parameters
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+// use morgan to log requests to the console
+app.use(morgan('dev'));
+
 app.use(passport.initialize());
 
 passport.serializeUser(function (user, done) {
@@ -96,6 +102,11 @@ var registerStrategy = new LocalStrategy(strategyOptions, function (email, passw
 
 passport.use('local-register', registerStrategy);
 passport.use('local-login', loginStrategy);
+
+// basic route
+app.get('/', function(req, res) {
+  res.send('ViaWest API is at http://localhost:8000');
+});
 
 app.post('/register', passport.authenticate('local-register'), function (req, res) {
   createSendToken(req.user, res);
