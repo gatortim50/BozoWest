@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('client')
-    .controller('LoginController', function ($scope, alert, $auth, $state, $window) {
+    .controller('LoginController', function ($scope, alert, $auth, $state) {
 
       $scope.submit = function () {
         $auth.login({
@@ -10,8 +10,6 @@
             password: $scope.password
           })
           .then(function (res) {
-            $window.localStorage.user = res.data.user.email;
-            console.log('login:', $window.localStorage.user);
             alert('success', 'Welcome!', 'Thanks for coming back, ' + res.data.user.email + '!');
             $state.go('main');
           })
@@ -20,8 +18,6 @@
 
       $scope.authenticate = function (provider) {
         $auth.authenticate(provider).then(function (res) {
-          $window.localStorage.user = res.data.user.displayName;
-          console.log('login:', $window.localStorage.user);
           alert('success', 'Welcome!', 'Thanks for coming back, ' + res.data.user.displayName + '!');
           $state.go('main');
         }, handleError);
