@@ -3,21 +3,20 @@
 
   angular.module('client')
     .controller('SocketController', function ($scope, $log, $socket, messageFormatter) {
+      var socket = this;
 
+      socket.nickName = 'ViaWestCSR';
+      socket.messageLog = 'Ready to chat!';
 
-      $scope.nickName = 'ViaWestCSR';
-      $scope.messageLog = 'Ready to chat!';
+      socket.sendMessage = function(msg) {
 
-      $scope.sendMessage = function(msg) {
-        console.log(msg);
+        socket.message = msg;
+        socket.messageLog = messageFormatter(new Date(), socket.nickName, socket.messageLog);
 
-        $scope.message = msg;
-        $scope.messageLog = messageFormatter(new Date(), $scope.nickName, $scope.messageLog);
-
-        $log.debug('sending message', $scope.message);
-        $socket.emit('message', $scope.nickName, $scope.message);
-        $log.debug('message sent', $scope.message);
-        $scope.message = '';
+        $log.debug('sending message', socket.message);
+        $socket.emit('message', socket.nickName, socket.message);
+        $log.debug('message sent', socket.message);
+        socket.message = '';
       };
 
       $scope.$on('add-album', function(event, data){
@@ -32,9 +31,9 @@
           return;
         }
         $scope.$apply(function() {
-          $scope.messageLog = messageFormatter(
+          socket.messageLog = messageFormatter(
               new Date(), data.source,
-              data.payload) + $scope.messageLog;
+              data.payload) + socket.messageLog;
         });
       });
 

@@ -2,12 +2,13 @@
   'use strict';
 
   angular.module('client')
-    .controller('LoginController', function ($scope, alert, $auth, $state) {
+    .controller('LoginController', function (alert, $auth, $state) {
+      var login = this;
 
-      $scope.submit = function () {
+      login.submit = function () {
         $auth.login({
-            email: $scope.email,
-            password: $scope.password
+            email: login.email,
+            password: login.password
           })
           .then(function (res) {
             alert('success', 'Welcome!', 'Thanks for coming back, ' + res.data.user.email + '!');
@@ -16,7 +17,7 @@
           .catch(handleError);
       };
 
-      $scope.authenticate = function (provider) {
+      login.authenticate = function (provider) {
         $auth.authenticate(provider).then(function (res) {
           alert('success', 'Welcome!', 'Thanks for coming back, ' + res.data.user.displayName + '!');
           $state.go('main');

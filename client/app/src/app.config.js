@@ -25,13 +25,14 @@
         .state('login', {
           url: '/login',
           templateUrl: '/views/login.html',
-          controller: 'LoginController'
+          controller: 'LoginController',
+          controllerAs: 'login'
         })
         .state('socket', {
           url: '/socket',
-          templateUrl: '/views/socket.html',
+          templateUrl: 'src/sockets/socket.html',
           controller: 'SocketController',
-          controllerAs: 'vm'
+          controllerAs: 'socket'
         })
         .state('logout', {
           url: '/logout',
