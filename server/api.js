@@ -2,6 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var User = require('./models/User.js');
+var Jobs = require('./models/Jobs.js');
 var jwt = require('jwt-simple');
 var passport = require('passport');
 var LocalStrategy = require('passport-local');
@@ -10,6 +11,7 @@ var moment = require('moment');
 var morgan = require('morgan');
 
 var app = express();
+var secret = 'shhh..';
 
 // use body parser so we can get info from POST and/or URL parameters
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -121,9 +123,9 @@ function createSendToken(user, res) {
   var payload = {
     sub: user.id,
     exp: moment().add(10, 'days').unix()
-  }
+  };
 
-  var token = jwt.encode(payload, 'shhh..');
+  var token = jwt.encode(payload, secret);
 
   res.status(200).send({
     user: user.toJSON(),
@@ -131,14 +133,6 @@ function createSendToken(user, res) {
   });
 }
 
-// -- Services ----------------------------------------------
-var jobs = [
-  'Colo & Network Services',
-  'Cloud',
-  'Security',
-  'AppliedTrust Consulting',
-  'Data Solutions'
-];
 
 app.get('/jobs', function (req, res) {
   if (!req.headers.authorization) {
@@ -148,13 +142,31 @@ app.get('/jobs', function (req, res) {
   }
 
   var token = req.headers.authorization.split(' ')[1];
-  var payload = jwt.decode(token, 'shhh..');
+  var payload = jwt.decode(token, secret);
   if (!payload.sub) {
     res.status(401).send({message: 'Authentication failed'});
   }
 
-  res.json(jobs);
+  res.json(Jobs.findAll());
+
 });
+
+app.get('/job/:id', function(req, res) {
+  if (!req.headers.authorization) {
+    return res.status(401).send({
+      message: 'You are not authorized'
+    });
+  }
+
+  var token = req.headers.authorization.split(' ')[1];
+  var payload = jwt.decode(token, secret);
+  if (!payload.sub) {
+    res.status(401).send({message: 'Authentication failed'});
+  }
+
+  res.json(Jobs.findById(req));
+});
+
 
 // -- Google ----------------------------------------------
 

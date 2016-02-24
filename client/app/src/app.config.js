@@ -14,7 +14,14 @@
         })
         .state('services', {
           url: '/services',
-          templateUrl: '/views/jobs.html',
+          templateUrl: 'src/jobs/jobs.html',
+          controller: 'JobsController',
+          controllerAs: 'service'
+        })
+        .state('services-detail', {
+          url: '/services-detail/:id',
+          //templateUrl: '/views/jobs.html',
+          template: 'detail',
           controller: 'JobsController'
         })
         .state('register', {
