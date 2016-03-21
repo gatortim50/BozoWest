@@ -2,6 +2,6 @@
 
 <div ng-repeat="job in service.jobs">
 
-	<a ui-sref="services-detail">{{job.id}}</a> {{job.name}}
+  <a ui-sref="detail({jobId: job.id})">{{job.id}}</a> {{job.name}}
 
 </div>

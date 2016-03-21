@@ -2,10 +2,9 @@
   'use strict';
 
   angular.module('client')
-    .controller('JobsController', function ($stateParams, JobsService, alert) {
+    .controller('JobsController', function (JobsService, alert) {
       var vm = this;
-      vm.serviceId = $stateParams.id;
-      console.log('id: ', vm.serviceId);
+
       vm.activate = activate;
 
       var onComplete = function(data){
@@ -18,17 +17,13 @@
         alert('warning', 'Unable to get product', vm.reason);
       };
 
-      function activatex() {
+      function activate() {
         JobsService.getJobs()
           .then(onComplete, onError);
       }
 
-      function activate() {
-        JobsService.getJob(1)
-          .then(onComplete, onError);
-      }
-
       activate();
+
 
     });
 

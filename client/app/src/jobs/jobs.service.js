@@ -21,11 +21,11 @@
         getJob: function (id) {
 
           var url = API_URL + 'job/' + id;
-          console.log("--- Search url: " + url);
+          console.log("--- Search url: ", url);
 
           return $http.get(url)
             .then(function(response){
-              console.log('jobs', response.data);
+              console.log('job: ', JSON.stringify(response.data));
               return response.data;
             });
 
