@@ -9,6 +9,7 @@ var LocalStrategy = require('passport-local');
 var request = require('request');
 var moment = require('moment');
 var morgan = require('morgan');
+var io = require('socket.io').listen(server);
 
 var app = express();
 var secret = 'shhh..';
@@ -83,7 +84,7 @@ var registerStrategy = new LocalStrategy(strategyOptions, function (email, passw
     }
 
     if (user) {
-      return done(null, false, {message: 'Email alread exists'});
+      return done(null, false, {message: 'Email already exists'});
     }
 
     var newUser = new User({
@@ -222,7 +223,7 @@ app.post('/auth/google', function (req, res) {
 });
 
 
-// -- MONGOOSE ---------------------------------
+// --- Mongoose ------------------------------
 
 mongoose.connect('mongodb://localhost/viawest');
 
@@ -234,13 +235,11 @@ db.once('open', function callback() {
   console.log('Database opened');
 });
 
-// -----------------------------------
+// --- Sockets --------------------------------
 
 var server = app.listen(8000, function () {
   console.log('api listening on ', server.address().port);
 });
-
-io = require('socket.io').listen(server);
 
 // set up our socket server
 require('./sockets/base')(io);

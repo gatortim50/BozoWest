@@ -23,23 +23,6 @@
           templateUrl: 'src/jobs/jobDetail.html',
           controller: 'JobDetailController',
           controllerAs: 'detail'
-          /***
-          resolve: {
-
-            job: function ($http, $stateParams) {
-              var jobId = $stateParams.jobId;
-              var url = API_URL + 'job/' + jobId;
-              console.log('url: ' + url);
-
-
-              return $http.get(url).then(function (response) {
-                console.log('response: ', response.data);
-                return response.data;
-              });
-
-            }
-          }
-        **/
         })
         .state('register', {
           url: '/register',

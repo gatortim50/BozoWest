@@ -27,7 +27,7 @@ ViaWest instructions:
 ```
 1. Build some REST Services in Node.js
 2. Build in Node.js a Websocket that sends a message to a client and have the client do something with the message
-3. Integrate a basic auth or OAuth2 authentication showing how different permissions affect the functionality/access
+3. Integrate OAuth2 authentication showing how different permissions affect the functionality/access
 4. Demonstrate Yeoman Angular generator
 5. Build the client in AngularJS and Bootstrap
 ```
