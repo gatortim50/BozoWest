@@ -1,14 +1,12 @@
-# ViaWest
-ViaWest Assignment - instructions at bottom
+# Name changed from ViaWest to BozoWest
+Assignment - instructions at bottom
 
-# yeomen generator
-yo angular [optional app name]
 
 # Check out repo and build
 mongodb must be running prior to `npm start`
 
 ```
-1. git clone git@github.com:gatortim50/ViaWest.git && cd ViaWest/server
+1. git clone git@github.com:gatortim50/BozoWest.git && cd BozoWest/server
 2. npm install && npm start
 ```
 
@@ -21,7 +19,7 @@ open another terminal/window
 3. grunt serve
 ```
 
-ViaWest instructions:
+Instructions from ViaWest personnel:
 ---------------------
 
 ```
