@@ -108,7 +108,7 @@ passport.use('local-login', loginStrategy);
 
 // basic route
 app.get('/', function(req, res) {
-  res.send('ViaWest API is at http://localhost:8000');
+  res.send('CloudWest API is at http://localhost:8000');
 });
 
 app.post('/register', passport.authenticate('local-register'), function (req, res) {
@@ -225,7 +225,7 @@ app.post('/auth/google', function (req, res) {
 
 // --- Mongoose ------------------------------
 
-mongoose.connect('mongodb://localhost/viawest');
+mongoose.connect('mongodb://localhost/cloudwest');
 
 var db = mongoose.connection;
 
