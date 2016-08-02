@@ -5,7 +5,7 @@
     .controller('SocketController', function ($scope, $log, $socket, messageFormatter) {
       var socket = this;
 
-      socket.nickName = 'ViaWestCSR';
+      socket.nickName = 'CloudWestCSR';
       socket.messageLog = 'Ready to chat!';
 
       socket.sendMessage = function(msg) {
